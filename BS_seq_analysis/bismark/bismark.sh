@@ -16,11 +16,14 @@ bismark  --bam --bowtie2 --non_directional  ~/workspace/alcohol_study/alcohol_sa
 
 # extract the bam files by group
 
-
-
-# extract mC
-
 cat <(samtools view -H all.trim.f.rc_trimmed_bismark_bt2.bam) <(samtools view all.trim.f.rc_trimmed_bismark_bt2.bam | grep "^1-") | samtools view -bS -o all.trim.f.rc_trimmed_bismark_bt2.Rep1.bam
 cat <(samtools view -H all.trim.f.rc_trimmed_bismark_bt2.bam) <(samtools view all.trim.f.rc_trimmed_bismark_bt2.bam | grep "^2-") | samtools view -bS -o all.trim.f.rc_trimmed_bismark_bt2.Rep2.bam
 cat <(samtools view -H all.trim.f.rc_trimmed_bismark_bt2.bam) <(samtools view all.trim.f.rc_trimmed_bismark_bt2.bam | grep "^3-") | samtools view -bS -o all.trim.f.rc_trimmed_bismark_bt2.Rep3.bam
 cat <(samtools view -H all.trim.f.rc_trimmed_bismark_bt2.bam) <(samtools view all.trim.f.rc_trimmed_bismark_bt2.bam | grep "^4-") | samtools view -bS -o all.trim.f.rc_trimmed_bismark_bt2.Rep4.bam
+
+# extract mC
+
+bismark_methylation_extractor --CX --buffer_size 16G  --gzip --parallel 4  --bedGraph  all.trim.f.rc_trimmed_bismark_bt2.Rep1.bam
+bismark_methylation_extractor --CX --buffer_size 16G  --gzip --parallel 4 --bedGraph  all.trim.f.rc_trimmed_bismark_bt2.Rep2.bam
+bismark_methylation_extractor --CX --buffer_size 16G  --gzip --parallel 4  --bedGraph  all.trim.f.rc_trimmed_bismark_bt2.Rep3.bam
+bismark_methylation_extractor --CX --buffer_size 16G  --gzip --parallel 4  --bedGraph  all.trim.f.rc_trimmed_bismark_bt2.Rep4.bam
